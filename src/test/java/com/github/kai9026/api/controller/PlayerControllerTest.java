@@ -24,7 +24,7 @@ import com.github.kai9026.api.service.PlayerService;
 
 
 @QuarkusTest
-public class PlayerControllerTest {
+class PlayerControllerTest {
 
     @InjectMock
     private PlayerService playerService;
@@ -37,7 +37,7 @@ public class PlayerControllerTest {
     }
 
 	@Test
-    public void testPlayersEndpoint() {
+    void testPlayersEndpoint() {
         when(playerService.getPlayers()).thenReturn(players);
 
         given()

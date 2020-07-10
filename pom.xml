@@ -22,6 +22,10 @@
       src/main/java/com/github/kai9026/api/model/**.java,
       src/main/java/com/github/kai9026/api/model/**/**.java
     </sonar.coverage.exclusions>
+    <sonar.projectKey>Kai9026_quarkus-reactive-api</sonar.projectKey>
+    <sonar.organization>kai9026</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.login>889a9d53db0351ec80b4ba8555aade9ee2664895</sonar.login>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
   </properties>
 
