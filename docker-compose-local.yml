@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  adminer:
+    image: adminer
+    restart: always
+    links: 
+      - db
+    ports:
+      - 8084:8080
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: api_test
+      POSTGRES_PASSWORD: api_password
+      POSTGRES_DB: db_trainer
+    ports:
+      - 5432:5432
