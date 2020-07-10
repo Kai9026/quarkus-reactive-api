@@ -26,7 +26,12 @@
     <sonar.organization>kai9026</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.login>889a9d53db0351ec80b4ba8555aade9ee2664895</sonar.login>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.language>java</sonar.language>
+    <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
+    <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -99,6 +104,13 @@
         <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>org.jacoco.agent</artifactId>
+      <classifier>runtime</classifier>
+      <scope>test</scope>
+      <version>${jacoco-plugin.version}</version>
+    </dependency>
     
   </dependencies>
 
@@ -125,10 +137,41 @@
         <version>${surefire-plugin.version}</version>
         <configuration>
           <systemPropertyVariables>
+            <jacoco-agent.destfile>${project.build.directory}/jacoco-ut.exec</jacoco-agent.destfile>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>instrument-ut</id>
+            <goals>
+                <goal>instrument</goal>
+            </goals>
+          </execution>
+          <execution>
+              <id>restore-ut</id>
+              <goals>
+                  <goal>restore-instrumented-classes</goal>
+              </goals>
+          </execution>
+          <execution>
+              <id>report-ut</id>
+              <goals>
+                  <goal>report</goal>
+              </goals>
+              <configuration>
+                  <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+              </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

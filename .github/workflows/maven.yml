@@ -29,3 +29,5 @@ jobs:
         java-version: 11
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Pass Sonar Cloud
+      run: mvn -B sonar:sonar --file pom.xml
