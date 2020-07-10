@@ -1,5 +1,6 @@
 package com.github.kai9026.api.controller;
 
+import io.quarkus.test.Mock;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.h2.H2DatabaseTestResource;
 import io.quarkus.test.junit.QuarkusTest;
@@ -23,7 +24,6 @@ import com.github.kai9026.api.service.PlayerService;
 
 
 @QuarkusTest
-@QuarkusTestResource(H2DatabaseTestResource.class)
 public class PlayerControllerTest {
 
     @InjectMock
